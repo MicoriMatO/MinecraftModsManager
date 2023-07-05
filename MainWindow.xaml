@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MinecraftModsManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Minecraft Mod Manager" MinHeight="450" Height="450" MinWidth="600" Width="600">
     <Grid>
-        
+        <Grid x:Name="LoadModsGrid" MinWidth="240" Width="Auto" Height="Auto" HorizontalAlignment="Left" Margin="10, 10, 0, 10">
+            <Label Content="LoadMods" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+            <ListBox x:Name="LoadMods" Margin="0, 25, 0, 0"></ListBox>
+        </Grid>
+        <Grid x:Name="ModsInGameGrid" MinWidth="240" Width="Auto" Height="Auto" HorizontalAlignment="Right" Margin="0, 10, 10, 10">
+            <Label Content="ModsInGame" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+            <ListBox x:Name="ModsInGame" Margin="0, 25, 0, 0"></ListBox>
+        </Grid>
+        <Grid Name="ControlButtons" MinWidth="080" Width="Auto" Height="Auto" HorizontalAlignment="Center" Margin="0, 40">
+            <StackPanel>
+                <Grid Margin="0, 5">
+                    <Button x:Name="ModOn" Content="On+\"  Height="20" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                </Grid>
+                <Grid Margin="0, 5">
+                    <Button x:Name="ModOff" Content="/-Off" Height="20" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
