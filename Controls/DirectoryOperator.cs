@@ -11,8 +11,16 @@ namespace MinecraftModsManager.Controls
     {
         public string ModDirectory { get; set; }
         public List<string> GetInfoModDirectory()
-        {  
-            return GetDirectoryesInfo(ModDirectory);
+        {
+            List<string> inDirectory = new List<string>();
+
+            foreach (var item in GetDirectoryesInfo(ModDirectory))
+            {
+                string temp = item.Replace(ModDirectory + @"\", "");
+                inDirectory.Add(temp);
+            }
+
+            return inDirectory;
         }
 
         private List<string> GetDirectoryesInfo(string directory)
