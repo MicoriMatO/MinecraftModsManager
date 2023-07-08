@@ -29,27 +29,38 @@ namespace MinecraftModsManager
             InitializeComponent();
 
             dirOper.ModDirectory = @"D:\Downloads\клиент";
+            dirOper.GameDirectory = @"C:\Users\maksi\Desktop\▼";
             PreLoadInfoDirectory();
         }
 
         private void PreLoadInfoDirectory()
         {
-            foreach (var item in dirOper.GetInfoModDirectory())
+            foreach (var item in dirOper.GetInfoDirectory(DirectoryOperator.WayGetInfo.InGame))
             {
+                ModsInGame.Items.Add(item);
+            }
+            foreach (var item in dirOper.GetInfoDirectory(DirectoryOperator.WayGetInfo.All))
+            {
+                if (ModsInGame.Items.Contains(item))
+                {
+                    continue;
+                }
+
                 LoadMods.Items.Add(item);
             }
         }
 
         private void ModOn_Click(object sender, RoutedEventArgs e)
         {
+            dirOper.InstallMod(LoadMods.SelectedItem.ToString());
+
             SwitchList(LoadMods, ModsInGame);
-            // скопировать из пула модов в игру
-                // DirectoriOperator
         }
         private void ModOff_Click(object sender, RoutedEventArgs e)
-        {
+        {   
+            dirOper.UnstallMod(ModsInGame.SelectedItem.ToString());
+
             SwitchList(ModsInGame, LoadMods);
-            //удалить из папки с игрой скопированые файлы
         }
 
         private void SwitchList(ListBox from, ListBox to)
