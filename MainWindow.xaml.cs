@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MinecraftModsManager.Controls;
+using MinecraftModsManager.Windows;
+
 
 namespace MinecraftModsManager
 {
@@ -69,6 +71,17 @@ namespace MinecraftModsManager
             from.Items.Remove(from.SelectedItem);
         }
 
-        
+        private void Task_Click(object sender, RoutedEventArgs e)
+        {
+            ContextMenu contextMenu = this.FindResource("TaskContextMenu") as ContextMenu;
+            contextMenu.PlacementTarget = sender as Button;
+            contextMenu.IsOpen = true;
+        }
+
+        private void SettingBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SettingWindow settingWindow = new SettingWindow();
+            settingWindow.ShowDialog();
+        }
     }
 }

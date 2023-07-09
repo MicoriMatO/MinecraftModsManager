@@ -6,6 +6,14 @@
         xmlns:local="clr-namespace:MinecraftModsManager"
         mc:Ignorable="d"
         Title="Minecraft Mod Manager" MinHeight="450" Height="450" MinWidth="600" Width="600">
+    <Window.Resources>
+        <ContextMenu x:Key="TaskContextMenu">
+            <MenuItem Header="Save Assembly Mods"/>
+            <MenuItem Header="Load Assembly Mods"/>
+            <Separator/>
+            <MenuItem Header="Clear Mods"/>
+        </ContextMenu>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -22,11 +30,18 @@
         </Grid>
         <Grid Name="ControlButtons" Grid.Column="1" MinWidth="080" Width="Auto" Height="Auto" HorizontalAlignment="Center" Margin="0, 40">
             <StackPanel>
-                <Grid Margin="0, 5">
+                <Grid Margin="3">
                     <Button x:Name="ModOn" Content="On+\"  Height="20" VerticalAlignment="Top" HorizontalAlignment="Stretch" Click="ModOn_Click"/>
                 </Grid>
-                <Grid Margin="0, 5">
+                <Grid Margin="3">
                     <Button x:Name="ModOff" Content="/-Off" Height="20" VerticalAlignment="Top" HorizontalAlignment="Stretch" Click="ModOff_Click"/>
+                </Grid>
+                <Grid Height="50"/>
+                <Grid Margin="3">
+                    <Button x:Name="TaskBtn" Content="Task" Height="20" VerticalAlignment="Top" HorizontalAlignment="Stretch" Click="Task_Click"/>
+                </Grid>
+                <Grid Margin="3">
+                    <Button x:Name="SettingBtn" Content="Setting" Click="SettingBtn_Click"/>
                 </Grid>
             </StackPanel>
         </Grid>
