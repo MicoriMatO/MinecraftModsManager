@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MinecraftModsManager.Controls;
+using MinecraftModsManager.DataApp;
 using MinecraftModsManager.Windows;
 
 
@@ -23,25 +24,25 @@ namespace MinecraftModsManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DirectoryOperator dirOper = new DirectoryOperator();
-
         //list будет хранить только название мода
         public MainWindow()
         {
             InitializeComponent();
+            AppManager.LoadUserConfig();
 
-            dirOper.ModDirectory = @"D:\Downloads\клиент";
-            dirOper.GameDirectory = @"C:\Users\maksi\Desktop\▼";
             PreLoadInfoDirectory();
         }
 
         private void PreLoadInfoDirectory()
         {
-            foreach (var item in dirOper.GetInfoDirectory(DirectoryOperator.WayGetInfo.InGame))
+            ModsInGame.Items.Clear();
+            LoadMods.Items.Clear();
+
+            foreach (var item in DirectoryOperator.GetInfoDirectory(DirectoryOperator.WayGetInfo.InGame))
             {
                 ModsInGame.Items.Add(item);
             }
-            foreach (var item in dirOper.GetInfoDirectory(DirectoryOperator.WayGetInfo.All))
+            foreach (var item in DirectoryOperator.GetInfoDirectory(DirectoryOperator.WayGetInfo.All))
             {
                 if (ModsInGame.Items.Contains(item))
                 {
@@ -54,15 +55,15 @@ namespace MinecraftModsManager
 
         private void ModOn_Click(object sender, RoutedEventArgs e)
         {
-            dirOper.InstallMod(LoadMods.SelectedItem.ToString());
+            DirectoryOperator.InstallMod(LoadMods.SelectedItem.ToString());
 
-            SwitchList(LoadMods, ModsInGame);
+            PreLoadInfoDirectory();
         }
         private void ModOff_Click(object sender, RoutedEventArgs e)
-        {   
-            dirOper.UnstallMod(ModsInGame.SelectedItem.ToString());
+        {
+            DirectoryOperator.UnstallMod(ModsInGame.SelectedItem.ToString());
 
-            SwitchList(ModsInGame, LoadMods);
+            PreLoadInfoDirectory();
         }
 
         private void SwitchList(ListBox from, ListBox to)
@@ -82,6 +83,52 @@ namespace MinecraftModsManager
         {
             SettingWindow settingWindow = new SettingWindow();
             settingWindow.ShowDialog();
+        }
+
+        private void ClearMods_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in ModsInGame.Items)
+            {
+                DirectoryOperator.UnstallMod(item.ToString());
+            }
+
+            PreLoadInfoDirectory();
+        }
+        private void SaveAsembliMods_Click(object sender, RoutedEventArgs e)
+        {
+            string mods = "";
+
+            foreach (var item in ModsInGame.Items)
+            {
+                mods += $"{item}\n";
+            }
+
+            AsembluModsOperator.CreateNewAsemblyMods(mods);
+        }
+        private void LoadAsembliMods_Click(object sender, RoutedEventArgs e)
+        {
+            string[] mods = (AsembluModsOperator.LoadAsemblyMods().Replace("\r","")).Split('\n');
+            string notConsistMods = "";
+
+            ClearMods_Click(sender, e);
+
+            foreach (var item in mods)
+            {
+                if (item != "")
+                {
+                    if (!LoadMods.Items.Contains(item))
+                    {
+                        notConsistMods += $"{notConsistMods}\n";
+                    }
+
+                    LoadMods.SelectedItem = item;
+                    ModOn_Click(sender, e);
+                }
+            }
+            if (notConsistMods != "")
+            {
+                MessageBox.Show($"Нет всех необходимых модов:\n{notConsistMods}");
+            } 
         }
     }
 }

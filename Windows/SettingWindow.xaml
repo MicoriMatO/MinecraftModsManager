@@ -19,36 +19,44 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="Propertyes" Grid.Column="2" Grid.Row="1">
-            <WrapPanel Orientation="Vertical">
-                <Grid Margin="3">
-                    <WrapPanel Orientation="Horizontal">
-                        <TextBox x:Name="ModsDirectoryPathTb" Width="200" Height="20" ></TextBox>
-                        <Button x:Name="FileManager0" Content="Ok" Width="20" Height="20"/>
-                    </WrapPanel>
-                </Grid>
-                <Grid Margin="3">
-                    <WrapPanel Orientation="Horizontal">
-                        <TextBox x:Name="GameDirectoryPathTb" Width="200" Height="20"></TextBox>
-                        <Button x:Name="FileManager1" Content="Ok" Width="20" Height="20"/>
-                    </WrapPanel>
-                </Grid>
-            </WrapPanel>
+            <GroupBox>
+                <WrapPanel Orientation="Vertical">
+                    <Grid Margin="3">
+                        <StackPanel>
+                            <Label Content="Mods Directory"/>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBox x:Name="ModsDirectoryPathTb" Width="200" Height="20" ></TextBox>
+                                <Button x:Name="FileManagerModsPath" Content="▼" Width="20" Height="20" Click="FileManager_Click"/>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="3">
+                        <StackPanel>
+                            <Label Content="Game Directory"/>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBox x:Name="GameDirectoryPathTb" Width="200" Height="20"></TextBox>
+                                <Button x:Name="FileManagerGamePath" Content="▼" Width="20" Height="20" Click="FileManager_Click"/>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Grid>
+                </WrapPanel>
+            </GroupBox>
         </Grid>
         <Grid Margin="3" Grid.Column="0" Grid.Row="1">
             <ListBox x:Name="SettingList">
-
+                <ListBoxItem Content="General"></ListBoxItem>
             </ListBox>
         </Grid>
         <WrapPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <Grid Margin="3">
-                <Button x:Name="AceptBtn" Content="Acept" Width="50" Height="20"/>
+                <Button x:Name="AceptBtn" Content="Acept" Width="50" Height="20" Click="AceptBtn_Click"/>
             </Grid>
             <Grid Margin="3">
-                <Button x:Name="OkBtn" Content="Ok" Width="50" Height="20"/>
+                <Button x:Name="OkBtn" Content="Ok" Width="50" Height="20" Click="OkBtn_Click"/>
             </Grid>
         </WrapPanel>
         <Grid Margin="3" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom">
-            <Button x:Name="CanselBtn" Content="Cansel" Width="50" Height="20" HorizontalAlignment="Left"/>
+            <Button x:Name="CanselBtn" Content="Cansel" Width="50" Height="20" HorizontalAlignment="Left" Click="CanselBtn_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -1,41 +1,42 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using MinecraftModsManager.DataApp;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace MinecraftModsManager.Controls
 {
-    public class DirectoryOperator
+    public static class DirectoryOperator
     {
-        public string ModDirectory { get; set; }
-        public string GameDirectory { get; set; }
         public enum WayGetInfo
         {
             All = 0,
             InGame = 1
         }
 
-        public List<string> GetInfoDirectory(WayGetInfo turns)
+        public static List<string> GetInfoDirectory(WayGetInfo turns)
         {
             List<string> inDirectory = new List<string>();
             List<string> listInfo = new List<string>();
 
             if (turns == WayGetInfo.All)
             {
-                listInfo = GetDirectoryesInfo(ModDirectory);
+                listInfo = GetDirectoryesInfo(UserConfig.ModsDirectoryPath);
             }
             if (turns == WayGetInfo.InGame)
             {
-                listInfo = GetDirectoryesInfo(GameDirectory);
+                listInfo = GetDirectoryesInfo(UserConfig.GameDirectoryPath);
             }
             
             foreach (var item in listInfo)
             {
-                string temp = item.Replace(ModDirectory + @"\", "");
-                temp = temp.Replace(GameDirectory + @"\", "");
+                string temp = item.Replace(UserConfig.ModsDirectoryPath + @"\", "");
+                temp = temp.Replace(UserConfig.GameDirectoryPath + @"\", "");
                 temp = temp.Replace(".jar", "");
                 inDirectory.Add(temp);
             }
@@ -43,7 +44,7 @@ namespace MinecraftModsManager.Controls
             return inDirectory;
         }
 
-        private List<string> GetDirectoryesInfo(string directory)
+        private static List<string> GetDirectoryesInfo(string directory)
         {
             List<string> inDirectory = new List<string>();
             try
@@ -58,10 +59,10 @@ namespace MinecraftModsManager.Controls
             
             return inDirectory;
         }
-        public void InstallMod(string modName)
+        public static void InstallMod(string modName)
         {
-            string modNameFrom = $@"{ModDirectory}\{modName}.jar";
-            string modNameTo = $@"{GameDirectory}\{modName}.jar";
+            string modNameFrom = $@"{UserConfig.ModsDirectoryPath}\{modName}.jar";
+            string modNameTo = $@"{UserConfig.GameDirectoryPath}\{modName}.jar";
 
             try
             {
@@ -69,9 +70,9 @@ namespace MinecraftModsManager.Controls
             }
             catch (Exception e) { MessageBox.Show(e.Message); }
         }
-        public void UnstallMod(string modName)
+        public static void UnstallMod(string modName)
         {
-            string modNameInGame = $@"{GameDirectory}\{modName}.jar";
+            string modNameInGame = $@"{UserConfig.GameDirectoryPath}\{modName}.jar";
 
             try
             {

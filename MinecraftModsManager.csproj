@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\AsembluModsOperator.cs" />
+    <Compile Include="Controls\FileOperator.cs" />
+    <Compile Include="DataApp\AppManager.cs" />
+    <Compile Include="DataApp\UserConfig.cs" />
     <Compile Include="Windows\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
@@ -67,7 +72,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\DirectoryOperator.cs" />
-    <Compile Include="Controls\SettingManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

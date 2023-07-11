@@ -8,10 +8,10 @@
         Title="Minecraft Mod Manager" MinHeight="450" Height="450" MinWidth="600" Width="600">
     <Window.Resources>
         <ContextMenu x:Key="TaskContextMenu">
-            <MenuItem Header="Save Assembly Mods"/>
-            <MenuItem Header="Load Assembly Mods"/>
+            <MenuItem Header="Save Assembly Mods" Click="SaveAsembliMods_Click"/>
+            <MenuItem Header="Load Assembly Mods" Click="LoadAsembliMods_Click"/>
             <Separator/>
-            <MenuItem Header="Clear Mods"/>
+            <MenuItem Header="Clear Mods" Click="ClearMods_Click"/>
         </ContextMenu>
     </Window.Resources>
     <Grid>
@@ -31,7 +31,7 @@
         <Grid Name="ControlButtons" Grid.Column="1" MinWidth="080" Width="Auto" Height="Auto" HorizontalAlignment="Center" Margin="0, 40">
             <StackPanel>
                 <Grid Margin="3">
-                    <Button x:Name="ModOn" Content="On+\"  Height="20" VerticalAlignment="Top" HorizontalAlignment="Stretch" Click="ModOn_Click"/>
+                    <Button x:Name="ModOn" Content="On+\" Click="ModOn_Click"/>
                 </Grid>
                 <Grid Margin="3">
                     <Button x:Name="ModOff" Content="/-Off" Height="20" VerticalAlignment="Top" HorizontalAlignment="Stretch" Click="ModOff_Click"/>
