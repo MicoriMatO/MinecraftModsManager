@@ -130,5 +130,10 @@ namespace MinecraftModsManager
                 MessageBox.Show($"Нет всех необходимых модов:\n{notConsistMods}");
             } 
         }
+
+        private void Grid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            PreLoadInfoDirectory();
+        }
     }
 }

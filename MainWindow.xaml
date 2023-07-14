@@ -14,7 +14,7 @@
             <MenuItem Header="Clear Mods" Click="ClearMods_Click"/>
         </ContextMenu>
     </Window.Resources>
-    <Grid>
+    <Grid MouseEnter="Grid_MouseEnter">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="80"/>
